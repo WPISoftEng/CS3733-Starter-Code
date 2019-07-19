@@ -2,39 +2,114 @@ plugins {
     id 'checkstyle'
     id 'application'
     id 'java'
-    id 'idea'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'jacoco'
 }
-mainClassName = 'path.to.main.class'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-version = '1.0'
+mainClassName = 'edu.wpi.teamname.Main'
 
 repositories {
     mavenCentral()
 }
 
-
 dependencies {
-    testCompile(
-            [group: 'junit', name: 'junit', version: '4.12'],
-            [group: 'com.jfoenix', name: 'jfoenix', version: '9.0.2'],
-            [group: 'org.apache.derby', name: 'derby', version: '10.11.1.1'],
-            [group: 'org.apache.derby', name: 'derbyclient', version: '10.11.1.1'],
-            [group: 'org.apache.derby', name: 'derbytools', version: '10.11.1.1']
+    implementation(
+            'com.jfoenix:jfoenix:9.0.2',
+            'org.apache.derby:derby:10.11.1.1',
+            'org.apache.derby:derbyclient:10.11.1.1',
+            'org.apache.derby:derbytools:10.11.1.1'
     )
-    compile(
-            [group: 'junit', name: 'junit', version: '4.12'],
-            [group: 'com.jfoenix', name: 'jfoenix', version: '9.0.2'],
-            [group: 'org.apache.derby', name: 'derby', version: '10.11.1.1'],
-            [group: 'org.apache.derby', name: 'derbyclient', version: '10.11.1.1'],
-            [group: 'org.apache.derby', name: 'derbytools', version: '10.11.1.1']
+
+    compileOnly(
+            'org.projectlombok:lombok:1.18.8'
     )
+
+    annotationProcessor(
+            'org.projectlombok:lombok:1.18.8'
+    )
+
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter:5.5.0',
+            'org.testfx:testfx-junit5:4.0.15-alpha'
+    )
+
+    runtimeOnly(
+            "org.openjfx:javafx-graphics:$javafx.version:win",
+            "org.openjfx:javafx-graphics:$javafx.version:linux",
+            "org.openjfx:javafx-graphics:$javafx.version:mac"
+    )
+}
+
+test {
+    useJUnitPlatform()
+}
+
+javafx {
+    version = '12'
+    modules = ['javafx.controls']
 }
 
 jar {
-
     manifest {
         attributes 'Main-Class': mainClassName
     }
-    from configurations.runtime.collect { zipTree(it) }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
+
+jacoco {
+    toolVersion = "0.8.4"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDRATIO'
+                minimum = 1.0
+            }
+            excludes = [
+                    'edu.wpi.teamname.App',
+                    'edu.wpi.teamname.Main'
+            ]
+        }
+
+        rule {
+            element = 'CLASS'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.95
+            }
+            excludes = [
+                    'edu.wpi.teamname.App',
+                    'edu.wpi.teamname.Main'
+            ]
+        }
+
+        rule {
+            element = 'CLASS'
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.90
+            }
+            excludes = [
+                    'edu.wpi.teamname.App',
+                    'edu.wpi.teamname.Main'
+            ]
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+jacocoTestCoverageVerification.dependsOn jacocoTestReport

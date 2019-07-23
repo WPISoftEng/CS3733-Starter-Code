@@ -1,0 +1,19 @@
+#!/bin/sh
+
+## Perform spotless check
+
+# stash unstaged files
+STASH_NAME=pre-commit-$(date +%s)
+git stash save -q --keep-index $STASH_NAME
+
+# perform gradle test
+./gradlew spotlessCheck
+RESULT=$?
+
+# unstash any stashed changes
+git stash pop -q stash@{$STASH_NAME}
+
+# If gradle failed, exit with error code
+if [ $RESULT -ne 0 ]; then 
+    exit $RESULT
+fi

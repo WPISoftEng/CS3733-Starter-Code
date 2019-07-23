@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'jacoco'
+    id 'com.diffplug.gradle.spotless' version '3.23.1'
 }
 mainClassName = 'edu.wpi.teamname.Main'
 
@@ -61,13 +62,6 @@ jacoco {
     toolVersion = "0.8.4"
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        html.enabled true
-    }
-}
-
 jacocoTestCoverageVerification {
     violationRules {
         rule {
@@ -78,8 +72,8 @@ jacocoTestCoverageVerification {
                 minimum = 1.0
             }
             excludes = [
-                    'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main'
+              'edu.wpi.teamname.App',
+              'edu.wpi.teamname.Main'
             ]
         }
 
@@ -113,3 +107,9 @@ jacocoTestCoverageVerification {
 
 check.dependsOn jacocoTestCoverageVerification
 jacocoTestCoverageVerification.dependsOn jacocoTestReport
+
+spotless {
+    java {
+        googleJavaFormat()
+    }
+}

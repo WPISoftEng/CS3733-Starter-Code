@@ -1,5 +1,9 @@
 package edu.wpi.teamname;
 
+import static org.testfx.api.FxAssert.verifyThat;
+
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,12 +14,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationExtension;
 
 @ExtendWith(ApplicationExtension.class)
-public class AppTest {
-
-  @Test
-  public void testClose(FxRobot robot) {
-    robot.press(KeyCode.ALT, KeyCode.F4);
-  }
+public class AppTest extends FxRobot {
 
   /** Setup test suite. */
   @BeforeAll
@@ -32,4 +31,16 @@ public class AppTest {
 
   @AfterAll
   public static void cleanup() {}
+
+  @Test
+  public void testButton() {
+    verifyThat("#textLabel", (Label l) -> !l.isVisible());
+    clickOn("#showTextButton");
+    verifyThat(".label", Node::isVisible);
+  }
+
+  @Test
+  public void testClose(FxRobot robot) {
+    robot.press(KeyCode.ALT, KeyCode.F4);
+  }
 }

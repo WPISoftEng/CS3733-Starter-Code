@@ -30,7 +30,9 @@ dependencies {
 
     testImplementation(
             'org.junit.jupiter:junit-jupiter:5.5.0',
-            'org.testfx:testfx-junit5:4.0.15-alpha',
+            'org.testfx:testfx-junit5:4.0.15-alpha'
+    )
+    testRuntimeOnly(
             "org.testfx:openjfx-monocle:jdk-12.0.1+2"
     )
 
@@ -43,6 +45,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    jvmArgs "-Dheadless=${project.hasProperty('headless') ? project.headless : false}"
 }
 
 javafx {

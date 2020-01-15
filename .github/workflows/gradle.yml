@@ -13,6 +13,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 12
-        java-package: jdk+fx
+        java-package: jdk
     - name: Build with Gradle
       run: ./gradlew check
+      env:
+          headless: true

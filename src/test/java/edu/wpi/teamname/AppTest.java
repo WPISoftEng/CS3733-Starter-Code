@@ -17,8 +17,15 @@ public class AppTest {
     robot.press(KeyCode.ALT, KeyCode.F4);
   }
 
+  /** Setup test suite. */
   @BeforeAll
   public static void setup() throws Exception {
+    if (Boolean.getBoolean("headless")) {
+      System.setProperty("testfx.robot", "glass");
+      System.setProperty("testfx.headless", "true");
+      System.setProperty("prism.order", "sw");
+      System.setProperty("prism.text", "t2k");
+    }
     FxToolkit.registerPrimaryStage();
     FxToolkit.setupApplication(App.class);
   }

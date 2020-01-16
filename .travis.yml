@@ -1,19 +1,8 @@
 language: java
 jdk:
-  - openjdk12
-
-matrix:
-include:
-  # Headed Linux
-  - os: linux
-    dist: trusty
-    jdk: openjdk12
-  # Headless macOS
-  - os: osx
-    osx_image: xcode9
-
-before_script:
-  - if [[ "${TRAVIS_OS_NAME}" == osx ]]; then brew update; brew cask reinstall caskroom/versions/openjdk12; fi
+  - oraclejdk8
+dist:
+  - trusty
 
 script:
   - ./gradlew -Pheadless=true check

@@ -1,19 +1,12 @@
 #!/bin/sh
 
-## Perform spotless check
+set -e
 
-# stash unstaged files
-STASH_NAME=pre-commit-$(date +%s)
-git stash save -q --keep-index $STASH_NAME
+REPO_ROOT_DIR="$(git rev-parse --show-toplevel)"
 
-# perform gradle test
-./gradlew spotlessCheck
-RESULT=$?
-
-# unstash any stashed changes
-git stash pop -q stash@{$STASH_NAME}
-
-# If gradle failed, exit with error code
-if [ $RESULT -ne 0 ]; then 
-    exit $RESULT
+files=$((git diff --cached --name-only --diff-filter=ACMR | grep -Ei "\.java$") || true)
+if [ ! -z "${files}" ]; then
+    comma_files=$(echo "$files" | paste -s -d "," -)
+    "${REPO_ROOT_DIR}/gradlew" spotlessApply -PspotlessFiles="$comma_files" &>/dev/null
+    git add $(echo "$files" | paste -s -d " " -)
 fi

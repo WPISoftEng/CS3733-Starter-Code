@@ -1,5 +1,5 @@
 plugins {
-    id 'checkstyle'
+    //id 'checkstyle'
     id 'application'
     id 'java'
     id 'jacoco'

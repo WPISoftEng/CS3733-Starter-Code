@@ -30,7 +30,7 @@ This is the gradle configuration file. Modify this file to add dependencies to y
       checks, comment out the spotless plugin as well as the spotless configuration at the bottom
        of the file
 
-##.travis.yml
+## .travis.yml
 This is the Travis-CI configuration file. **Only modify this file if you are sure you know what you are doing**
 
 ## lombox.config

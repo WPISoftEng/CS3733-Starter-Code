@@ -1,8 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
-dist:
-  - trusty
+os: linux
+dist: trusty
 
 script:
   - ./gradlew -Pheadless=true check

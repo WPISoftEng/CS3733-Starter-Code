@@ -1,5 +1,4 @@
 plugins {
-    //id 'checkstyle'
     id 'application'
     id 'java'
     id 'jacoco'
@@ -8,12 +7,6 @@ plugins {
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 mainClassName = 'edu.wpi.teamname.Main'
-
-//TestFX doesn't play nice with macOS
-String osName = System.getProperty("os.name").toLowerCase();
-if (osName.contains("mac")) {
-   project.setProperty("headless", "true")
-}
 
 repositories {
     mavenCentral()
@@ -37,8 +30,8 @@ dependencies {
     )
 
     testImplementation(
-            [group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.5.0'],
-            [group: 'org.testfx', name: 'testfx-junit5', version: '4.0.15-alpha']
+            [group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.6.0'],
+            [group: 'org.testfx', name: 'testfx-junit5', version: '4.0.16-alpha']
     )
     testRuntimeOnly(
             [group: 'org.testfx', name: 'openjfx-monocle', version: '8u76-b04']

@@ -10,6 +10,9 @@ mainClassName = 'edu.wpi.teamname.Main'
 
 repositories {
     mavenCentral()
+    maven {
+    	url 'https://apisite.crmyers.dev/maven'
+    }
 }
 
 dependencies {

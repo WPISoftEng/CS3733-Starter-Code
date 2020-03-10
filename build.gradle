@@ -2,14 +2,16 @@ plugins {
     id 'application'
     id 'java'
     id 'jacoco'
-    id 'com.diffplug.gradle.spotless' version '3.23.1'
+    id 'com.diffplug.gradle.spotless' version '3.27.1'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = '13'
+targetCompatibility = '13'
 mainClassName = 'edu.wpi.teamname.Main'
 
 repositories {
     mavenCentral()
+    jcenter()
     maven {
     	url 'https://apisite.crmyers.dev/maven'
     }
@@ -40,6 +42,12 @@ dependencies {
             [group: 'org.testfx', name: 'openjfx-monocle', version: '8u76-b04']
     )
 }
+
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls',  'javafx.fxml']
+}
+
 
 test {
     useJUnitPlatform()
@@ -104,10 +112,11 @@ jacocoTestCoverageVerification {
 
 check.dependsOn jacocoTestCoverageVerification
 jacocoTestCoverageVerification.dependsOn jacocoTestReport
+compileJava.dependsOn 'spotlessApply'
 
 // uncomment to enable spotless checking
-//spotless {
-//    java {
-//        googleJavaFormat()
-//    }
-//}
+spotless {
+    java {
+        googleJavaFormat()
+    }
+}

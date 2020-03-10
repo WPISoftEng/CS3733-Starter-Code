@@ -10,7 +10,10 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   @Override
-  public void start(Stage primaryStage) throws Exception {
+  public void init() {}
+
+  @Override
+  public void start(Stage primaryStage) {
     Label label = new Label("Text");
     label.setId("textLabel");
     label.setVisible(false);
@@ -27,4 +30,7 @@ public class App extends Application {
     primaryStage.setScene(scene);
     primaryStage.show();
   }
+
+  @Override
+  public void stop() {}
 }

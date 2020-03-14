@@ -34,7 +34,6 @@ dependencies {
     )
 }
 
-
 test {
     useJUnitPlatform()
 }
@@ -63,7 +62,6 @@ jacocoTestCoverageVerification {
                 value = 'COVEREDRATIO'
                 minimum = 1.0
             }
-            excludes = codeCoverageExcludes
         }
 
         rule {

@@ -1,11 +1,11 @@
 language: java
-jdk:
-  - oraclejdk8
+jdk: openjdk13
 os: linux
-dist: trusty
+services:
+    - xvfb
 
 script:
-  - ./gradlew -Pheadless=true check
+  - ./gradlew check
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

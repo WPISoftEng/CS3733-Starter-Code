@@ -1,6 +1,8 @@
 language: java
 jdk: openjdk13
 os: linux
+services:
+    - xvfb
 
 script:
   - ./gradlew check

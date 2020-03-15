@@ -28,11 +28,14 @@ dependencies {
 
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
+            'com.google.inject:guice:4.2.2',
     )
 
     testImplementation(
             'org.junit.jupiter:junit-jupiter:5.6.0',
             'org.testfx:testfx-junit5:4.0.16-alpha',
+            'org.mockito:mockito-core:3.3.3',
+            'org.mockito:mockito-junit-jupiter:3.3.3',
     )
     testRuntimeOnly(
             'org.testfx:openjfx-monocle:8u76-b04',
@@ -74,7 +77,8 @@ jacocoTestCoverageVerification {
             }
             excludes = [
                     'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main'
+                    'edu.wpi.teamname.Main',
+                    'edu.wpi.teamname.modules.*'
             ]
         }
 
@@ -87,7 +91,8 @@ jacocoTestCoverageVerification {
             }
             excludes = [
                     'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main'
+                    'edu.wpi.teamname.Main',
+                    'edu.wpi.teamname.modules.*',
             ]
         }
 
@@ -100,7 +105,8 @@ jacocoTestCoverageVerification {
             }
             excludes = [
                     'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main'
+                    'edu.wpi.teamname.Main',
+                    'edu.wpi.teamname.modules.*',
             ]
         }
     }

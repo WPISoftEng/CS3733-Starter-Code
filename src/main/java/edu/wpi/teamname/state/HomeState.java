@@ -1,20 +1,12 @@
 package edu.wpi.teamname.state;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import lombok.Data;
 
+@Data
 public class HomeState {
 
-  private SimpleBooleanProperty isClicked = new SimpleBooleanProperty(false);
-
-  public boolean isClicked() {
-    return this.isClicked.get();
-  }
-
-  public void setClicked(boolean b) {
-    this.isClicked.set(b);
-  }
-
-  public SimpleBooleanProperty getIsClickedProp() {
-    return this.isClicked;
-  }
+  private SimpleBooleanProperty clickedProperty = new SimpleBooleanProperty(false);
+  private SimpleStringProperty currentNodeProperty = new SimpleStringProperty(null);
 }

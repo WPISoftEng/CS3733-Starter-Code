@@ -25,12 +25,15 @@ dependencies {
 
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
+            'com.google.inject:guice:4.2.2',
     )
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
             'org.junit.jupiter:junit-jupiter:5.6.0',
             'org.testfx:testfx-junit5:4.0.16-alpha',
+            'org.mockito:mockito-core:3.3.3',
+            'org.mockito:mockito-junit-jupiter:3.3.3',
     )
 }
 

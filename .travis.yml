@@ -4,6 +4,9 @@ os: linux
 services:
     - xvfb
 
+before_install:
+  - chmod +x gradlew
+
 script:
   - ./gradlew check
 

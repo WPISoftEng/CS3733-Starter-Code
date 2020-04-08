@@ -40,6 +40,7 @@ public class HomeTest extends ApplicationTest {
     Parent sceneRoot = loader.load(getClass().getResourceAsStream("HomeView.fxml"));
     Scene scene = new Scene(sceneRoot);
     stage.setScene(scene);
+    stage.setAlwaysOnTop(true);
     stage.show();
   }
 

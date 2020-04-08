@@ -28,6 +28,7 @@ public class App extends Application {
     Parent root = fxmlLoader.load(getClass().getResourceAsStream("views/HomeView.fxml"));
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
+    primaryStage.setAlwaysOnTop(true);
     primaryStage.show();
   }
 

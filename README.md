@@ -51,7 +51,7 @@ This directory contains useful git hooks that will force your teammates to run t
  - pre-push
    - pre-push will run gradle tests to make sure code passes before you push to github
 
-To install these hooks, simple run `cp .hooks/* .git/hooks/` from the root directory
+To install these hooks, simply run `git config core.hookspath .hooks` from the root directory
 
 ## config/
 Config contains styleguide config files both for checkstyle (another optional plugin for gradle

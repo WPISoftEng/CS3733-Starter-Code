@@ -42,14 +42,8 @@ This file tells git which files to ignore in the repo. It should be correctly co
 **Only modify this file if you are sure you know what you are doing**
 
 ## .hooks/
-This directory contains useful git hooks that will force your teammates to run tests *before
-* pushing to github. There are currently two hook files
- - pre-commit
-  - pre-commit will automatically format your files to adhere to the google style guide. This is
-   helpful as it makes code more readable, but also prevents commits that contain a large number
-    of style guide changes
- - pre-push
-   - pre-push will run gradle tests to make sure code passes before you push to github
+This directory contains a useful git hook that will force your teammates to run tests before
+pushing to github. This `pre-push` hook will run gradle tests to make sure code passes.
 
 To install these hooks, simply run `git config core.hookspath .hooks` from the root directory
 

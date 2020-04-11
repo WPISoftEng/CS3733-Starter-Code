@@ -1,30 +1,23 @@
 package edu.wpi.teamname.services;
 
+import com.google.inject.Inject;
 import java.sql.*;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DatabaseService {
   /*
    Database service class. This class will be loaded as a Singleton by Guice.
   */
 
-  private Connection connection;
+  private final Connection connection;
 
-  public DatabaseService() {
-    try {
-      Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      return;
-    }
+  @Inject
+  public DatabaseService(Connection connection) {
+    this.connection = connection;
+  }
 
-    // remove :memory to have persistent database
-    try {
-      connection = DriverManager.getConnection("jdbc:derby:memory:myDB;create=true");
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return;
-    }
-
+  public void initTable() {
     try {
       Statement stmt = connection.createStatement();
       String query =
@@ -35,11 +28,10 @@ public class DatabaseService {
               + "Location VARCHAR(255), "
               + "PRIMARY KEY (Id))";
       stmt.execute(query);
-      System.out.println("Table created");
       query = "INSERT into Employees(Name, salary, location) VALUES('Wilson Wong', 100000, 'WPI')";
       stmt.execute(query);
     } catch (SQLException e) {
-      e.printStackTrace();
+      log.error(e.getMessage());
     }
   }
 
@@ -50,10 +42,9 @@ public class DatabaseService {
       if (res.next()) {
         return res.getString("Name");
       }
-      return "";
     } catch (SQLException throwables) {
-      throwables.printStackTrace();
-      return "";
+      log.error(throwables.getMessage());
     }
+    return null;
   }
 }

@@ -3,7 +3,6 @@ package edu.wpi.teamname.modules;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import edu.wpi.teamname.services.DatabaseService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,9 +16,7 @@ public class DatabaseServiceProvider extends AbstractModule {
   private final String realDbUrl = "jdbc:derby:myDB;create=true";
 
   @Override
-  protected void configure() {
-    bind(DatabaseService.class).asEagerSingleton();
-  }
+  protected void configure() {}
 
   /**
    * Provide single connection for database access.

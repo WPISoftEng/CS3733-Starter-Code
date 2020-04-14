@@ -16,9 +16,7 @@ public class DatabaseServiceProvider extends AbstractModule {
   private final String realDbUrl = "jdbc:derby:myDB;create=true";
 
   @Override
-  protected void configure() {
-    bind(DatabaseService.class).asEagerSingleton();
-  }
+  protected void configure() {}
 
   /**
    * Provide single connection for database access.

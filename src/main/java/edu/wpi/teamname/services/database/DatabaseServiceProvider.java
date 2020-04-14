@@ -1,9 +1,8 @@
-package edu.wpi.teamname.modules;
+package edu.wpi.teamname.services.database;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import edu.wpi.teamname.services.DatabaseService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

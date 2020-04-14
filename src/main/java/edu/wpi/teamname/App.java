@@ -1,13 +1,18 @@
 package edu.wpi.teamname;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import edu.wpi.teamname.modules.DatabaseServiceProvider;
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
+import edu.wpi.teamname.services.database.DatabaseServiceProvider;
+import edu.wpi.teamname.state.HomeStateProvider;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,13 +26,24 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    Injector injector = Guice.createInjector(new DatabaseServiceProvider());
+    Scene primaryScene = new Scene(new AnchorPane());
+    Injector injector =
+        Guice.createInjector(
+            new DatabaseServiceProvider(),
+            new HomeStateProvider(),
+            new AbstractModule() {
+              @Provides
+              @Singleton
+              public Scene providePrimaryScene() {
+                return primaryScene;
+              }
+            });
     FXMLLoader fxmlLoader = new FXMLLoader();
     fxmlLoader.setControllerFactory(injector::getInstance);
 
     Parent root = fxmlLoader.load(getClass().getResourceAsStream("views/HomeView.fxml"));
-    Scene scene = new Scene(root);
-    primaryStage.setScene(scene);
+    primaryScene.setRoot(root);
+    primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);
     primaryStage.show();
   }

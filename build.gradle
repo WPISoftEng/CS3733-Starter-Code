@@ -65,6 +65,11 @@ jacoco {
     toolVersion = "0.8.4"
 }
 
+def codeCoverageExcludes = [
+        'edu.wpi.teamname.App*',
+        'edu.wpi.teamname.Main',
+        '*Provider*',
+]
 jacocoTestCoverageVerification {
     violationRules {
         rule {
@@ -74,11 +79,7 @@ jacocoTestCoverageVerification {
                 value = 'COVEREDRATIO'
                 minimum = 1.0
             }
-            excludes = [
-                    'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main',
-                    'edu.wpi.teamname.modules.*'
-            ]
+            excludes = codeCoverageExcludes
         }
 
         rule {
@@ -88,11 +89,7 @@ jacocoTestCoverageVerification {
                 value = 'COVEREDRATIO'
                 minimum = 0.25
             }
-            excludes = [
-                    'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main',
-                    'edu.wpi.teamname.modules.*',
-            ]
+            excludes = codeCoverageExcludes
         }
 
         rule {
@@ -102,11 +99,7 @@ jacocoTestCoverageVerification {
                 value = 'COVEREDRATIO'
                 minimum = 0.25
             }
-            excludes = [
-                    'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main',
-                    'edu.wpi.teamname.modules.*',
-            ]
+            excludes = codeCoverageExcludes
         }
     }
 }

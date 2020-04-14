@@ -1,4 +1,4 @@
-package edu.wpi.teamname.services;
+package edu.wpi.teamname.services.database;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

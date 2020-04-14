@@ -1,4 +1,4 @@
-package edu.wpi.teamname.services;
+package edu.wpi.teamname.services.database;
 
 import com.google.inject.Inject;
 import java.sql.*;
@@ -13,7 +13,7 @@ public class DatabaseService {
   private final Connection connection;
 
   @Inject
-  public DatabaseService(Connection connection) {
+  DatabaseService(Connection connection) {
     this.connection = connection;
   }
 

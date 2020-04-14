@@ -10,4 +10,9 @@ public class HomeState {
 
   private SimpleBooleanProperty clickedProperty = new SimpleBooleanProperty(false);
   private SimpleStringProperty currentNodeProperty = new SimpleStringProperty(null);
+
+  @Override
+  public String toString() {
+    return super.toString();
+  }
 }

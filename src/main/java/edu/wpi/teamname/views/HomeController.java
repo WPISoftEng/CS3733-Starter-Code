@@ -1,7 +1,6 @@
 package edu.wpi.teamname.views;
 
 import com.google.inject.Inject;
-import edu.wpi.teamname.factories.FXMLLoaderFactory;
 import edu.wpi.teamname.services.ServiceTwo;
 import edu.wpi.teamname.services.database.DatabaseService;
 import edu.wpi.teamname.state.HomeState;
@@ -23,7 +22,7 @@ public class HomeController implements Initializable {
 
   @Inject DatabaseService db;
   @Inject ServiceTwo graph;
-  @Inject FXMLLoaderFactory fxmlLoaderFactory;
+  @Inject FXMLLoader loader;
   @Inject HomeState state;
   @FXML private Label text;
 
@@ -57,7 +56,6 @@ public class HomeController implements Initializable {
   }
 
   private void advanceScene() throws IOException {
-    FXMLLoader loader = fxmlLoaderFactory.createInjectedFXMLLoader();
     Parent root = loader.load(getClass().getResourceAsStream("HomeView.fxml"));
     appPrimaryScene.setRoot(root);
   }

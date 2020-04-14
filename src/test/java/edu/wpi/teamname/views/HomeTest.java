@@ -1,12 +1,14 @@
 package edu.wpi.teamname.views;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.testfx.api.FxAssert.verifyThat;
 
-import edu.wpi.teamname.factories.FXMLLoaderFactory;
 import edu.wpi.teamname.services.ServiceTwo;
 import edu.wpi.teamname.services.database.DatabaseService;
 import edu.wpi.teamname.state.HomeState;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.testfx.api.FxRobot;
@@ -30,52 +31,44 @@ public class HomeTest extends FxRobot {
 
   // Mock dependencies
   @Mock ServiceTwo two;
-  @Mock DatabaseService one;
-  @Mock FXMLLoaderFactory fxmlLoaderFactory;
-
+  @Mock DatabaseService dbService;
+  @Mock FXMLLoader mockloader;
   // Don't mock. Pass in real thing.
-  @Spy HomeState state;
-
+  @Spy HomeState state = new HomeState();
   @InjectMocks HomeController controller;
+
   private final FXMLLoader loader = new FXMLLoader();
-  private Scene primaryScene;
-
-  @BeforeEach
-  public void init() {
-    // We are forced to inject this object afterward, since it must be created on the JavaFX thread
-    controller.setAppPrimaryScene(primaryScene);
-
-    Mockito.when(one.getEmployeeName()).thenReturn("Wilson Wong");
-    Mockito.when(fxmlLoaderFactory.createInjectedFXMLLoader())
-        .then(
-            (invocation) ->
-                new FXMLLoader() {
-                  {
-                    setControllerFactory(i -> controller);
-                  }
-                });
-  }
+  private Parent sceneRoot;
 
   @Start
   private void start(Stage stage) throws IOException {
     loader.setControllerFactory((i) -> controller);
-    Parent sceneRoot = loader.load(getClass().getResourceAsStream("HomeView.fxml"));
-    primaryScene = new Scene(sceneRoot);
+    sceneRoot = loader.load(getClass().getResourceAsStream("HomeView.fxml"));
+    var primaryScene = new Scene(sceneRoot);
+    // We are forced to inject this object afterward, since it must be created on the JavaFX thread
+    controller.setAppPrimaryScene(primaryScene);
+
     stage.setScene(primaryScene);
     stage.setAlwaysOnTop(true);
     stage.show();
   }
 
+  @BeforeEach
+  public void init() throws IOException {
+    when(mockloader.load(any(InputStream.class))).thenReturn(sceneRoot);
+    when(dbService.getEmployeeName()).thenReturn("Wilson Wong");
+  }
+
   @Test
   public void testSingleClick() {
-    Mockito.when(two.getResults()).thenCallRealMethod();
+    when(two.getResults()).thenCallRealMethod();
     clickOn("Click Me");
     verifyThat("#text", Node::isVisible);
   }
 
   @Test
   public void testDoubleClick() {
-    Mockito.when(two.getResults()).thenCallRealMethod();
+    when(two.getResults()).thenCallRealMethod();
     clickOn("Click Me");
     clickOn("Click Me");
     verifyThat("#text", (n) -> !n.isVisible());
@@ -83,7 +76,7 @@ public class HomeTest extends FxRobot {
 
   @Test
   public void testGetNodes() {
-    Mockito.when(two.getResults())
+    when(two.getResults())
         .thenReturn(
             new ArrayList<>() {
               {

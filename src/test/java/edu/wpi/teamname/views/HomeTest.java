@@ -33,8 +33,9 @@ public class HomeTest extends FxRobot {
   @Mock ServiceTwo two;
   @Mock DatabaseService dbService;
   @Mock FXMLLoader mockloader;
-  // Don't mock. Pass in real thing.
-  @Spy HomeState state = new HomeState();
+  // Don't mock since we require the state to change
+  @Spy HomeState state;
+
   @InjectMocks HomeController controller;
 
   private final FXMLLoader loader = new FXMLLoader();

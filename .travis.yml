@@ -1,14 +1,13 @@
 language: java
 jdk: openjdk13
 os: linux
-services:
-    - xvfb
+dist: xenial
 
 before_install:
   - chmod +x gradlew
 
 script:
-  - ./gradlew check
+  - xvfb-run --server-args='-screen 0 1920x1080x24' ./gradlew check
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

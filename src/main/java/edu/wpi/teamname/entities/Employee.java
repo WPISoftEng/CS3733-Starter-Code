@@ -3,8 +3,10 @@ package edu.wpi.teamname.entities;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class Employee {
   private SimpleStringProperty firstName = new SimpleStringProperty("");
   private SimpleStringProperty lastName = new SimpleStringProperty("");

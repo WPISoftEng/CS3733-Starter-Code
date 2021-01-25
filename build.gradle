@@ -70,7 +70,7 @@ jacocoTestCoverageVerification {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
                 minimum = 0.25
-            }AD
+            }
             excludes = codeCoverageExcludes
         }
 

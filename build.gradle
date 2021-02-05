@@ -5,6 +5,9 @@ plugins {
     id 'com.diffplug.gradle.spotless' version '3.27.1'
     id "io.freefair.lombok" version "5.0.0-rc6"
 }
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 mainClassName = 'edu.wpi.teamname.Main'
 
 repositories {

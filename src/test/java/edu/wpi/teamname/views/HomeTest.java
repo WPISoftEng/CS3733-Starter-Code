@@ -45,7 +45,7 @@ public class HomeTest extends FxRobot {
   private void start(Stage stage) throws IOException {
     loader.setControllerFactory((i) -> controller);
     sceneRoot = loader.load(getClass().getResourceAsStream("HomeView.fxml"));
-    var primaryScene = new Scene(sceneRoot);
+    Scene primaryScene = new Scene(sceneRoot);
     // We are forced to inject this object afterward, since it must be created on the JavaFX thread
     controller.setAppPrimaryScene(primaryScene);
 
@@ -79,7 +79,7 @@ public class HomeTest extends FxRobot {
   public void testGetNodes() {
     when(two.getResults())
         .thenReturn(
-            new ArrayList<>() {
+            new ArrayList<String>() {
               {
                 add("Expected");
               }

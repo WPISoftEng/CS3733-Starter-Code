@@ -40,7 +40,7 @@ public class App extends Application {
                 return primaryScene;
               }
             });
-    var db = injector.getInstance(DatabaseService.class);
+    DatabaseService db = injector.getInstance(DatabaseService.class);
     db.initTable();
     loader = new FXMLLoader();
     loader.setControllerFactory(injector::getInstance);

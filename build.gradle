@@ -57,7 +57,13 @@ jar {
 
 def codeCoverageExcludes = [
         'edu.wpi.teamname.App',
+        'edu.wpi.teamname.services.database.DatabaseServiceProvider',
+        'edu.wpi.teamname.services.*',
+        'edu.wpi.teamname.views.FXMLLoaderProvider',
+        'edu.wpi.teamname.views.HomeController',
         'edu.wpi.teamname.Main',
+        'edu.wpi.teamname.state.HomeStateProvider',
+        'edu.wpi.teamname.App.1',
 ]
 
 jacoco {

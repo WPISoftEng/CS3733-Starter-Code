@@ -4,17 +4,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.views.HomeController">
-   <children>
-      <HBox spacing="100.0">
-         <children>
-            <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="500.0" />
-            <Button mnemonicParsing="false" onAction="#print" text="Print" />
-            <TableView fx:id="studentTableView" prefHeight="200.0" prefWidth="500.0" />
-         </children>
-         <padding>
-            <Insets bottom="100.0" left="50.0" right="50.0" top="100.0" />
-         </padding>
-      </HBox>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="edu.wpi.teamname.views.HomeController">
+  <children>
+    <HBox spacing="100.0">
+      <children>
+        <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="500.0"/>
+        <Button mnemonicParsing="false" onAction="#printClicked" text="Print"/>
+        <TableView fx:id="studentTableView" prefHeight="200.0" prefWidth="500.0"/>
+      </children>
+      <padding>
+        <Insets bottom="100.0" left="50.0" right="50.0" top="100.0"/>
+      </padding>
+    </HBox>
+  </children>
 </AnchorPane>

@@ -20,13 +20,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HomeController implements Initializable {
 
-  @Inject DatabaseService db;
-  @Inject ServiceTwo graph;
-  @Inject FXMLLoader loader;
-  @Inject HomeState state;
+  private final DatabaseService db;
+  private final ServiceTwo s2;
+  private final FXMLLoader loader;
+  private final HomeState state;
   @FXML private Label text;
 
   private Scene appPrimaryScene;
+
+  @Inject
+  public HomeController(DatabaseService db, ServiceTwo s2, FXMLLoader loader, HomeState state) {
+    this.db = db;
+    this.s2 = s2;
+    this.loader = loader;
+    this.state = state;
+  }
 
   /**
    * This method allows the tests to inject the scene at a later time, since it must be done on the
@@ -51,7 +59,7 @@ public class HomeController implements Initializable {
     log.trace("{} clicked", ((Button) actionEvent.getSource()).getText());
     log.info(db.getEmployeeName());
     this.state.getClickedProperty().set(!state.getClickedProperty().get());
-    this.state.getCurrentNodeProperty().set(graph.getResults().get(0));
+    this.state.getCurrentNodeProperty().set(s2.getResults().get(0));
     advanceScene();
   }
 

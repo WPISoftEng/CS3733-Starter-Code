@@ -38,9 +38,17 @@ dependencies {
     )
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.fork = true
+}
+
 
 test {
     useJUnitPlatform()
+}
+
+tasks.withType(Test).configureEach {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
 
 def codeCoverageExcludes = [

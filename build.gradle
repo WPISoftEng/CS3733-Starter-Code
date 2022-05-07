@@ -56,10 +56,6 @@ def codeCoverageExcludes = [
         'edu.wpi.teamname.Main',
 ]
 
-jacoco {
-    toolVersion = "0.8.4"
-}
-
 jacocoTestCoverageVerification {
     violationRules {
         rule {

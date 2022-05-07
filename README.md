@@ -1,5 +1,5 @@
-To assemble a jar file for your project, run the "distZip" gradle task, either through IntelliJ or by doing
-`gradle distZip` on a terminal. Gradle will automatically download all dependencies needed to compile your zip file,
+To assemble a jar file for your project, run the "shadowJar" gradle task, either through IntelliJ or by doing
+`gradle shadowJar` on a terminal. Gradle will automatically download all dependencies needed to compile your zip file,
 which will be stored in the build/distributions folder.
 
 Make sure to edit the main class attribute the build.gradle file, you'll need to change it in order to obtain
@@ -29,9 +29,7 @@ This is the gradle configuration file. Modify this file to add dependencies to y
      [here](https://github.com/diffplug/spotless). If you would like to disable the spotless
       checks, comment out the spotless plugin as well as the spotless configuration at the bottom
        of the file
-
-## .travis.yml
-This is the Travis-CI configuration file. **Only modify this file if you are sure you know what you are doing**
+    
 
 ## lombox.config
 This is the configuration for [Lombok](https://projectlombok.org/), a very useful java library
